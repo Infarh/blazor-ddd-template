@@ -29,7 +29,7 @@
     {
       "modifiers": [
         {
-          "exclude": [ "register.bat", "unregister.bat", "**/wwwroot/**", "**/bin/**", "**/obj/**", "**/.vs/**", "**/_ReSharper.Caches/**" ]
+          "exclude": [ "register.bat", "unregister.bat", "**/wwwroot/**", "**/bin/**", "**/obj/**", "**/.vs/**", "**/_ReSharper.Caches/**", "**/.git/**" ]
         }
       ]
     }
