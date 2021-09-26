@@ -70,19 +70,19 @@ namespace SolutionTemplate.DAL.Repositories
 
         public async Task<IPage<T>> GetPage(int PageNumber, int PageSize, CancellationToken Cancel = default)
         {
-            if (PageSize <= 0) return new Page<T>(Enumerable.Empty<T>(), PageSize, PageNumber, PageSize);
+            if (PageSize <= 0) return new Page<T>(Enumerable.Empty<T>(), 0, PageSize, PageNumber, PageSize);
 
             await using var db = ContextFactory.CreateDbContext();
 
             IQueryable<T> query = GetDbQuery(db);
             var total_count = await query.CountAsync(Cancel).ConfigureAwait(false);
-            if (total_count == 0) return new Page<T>(Enumerable.Empty<T>(), PageSize, PageNumber, PageSize);
+            if (total_count == 0) return new Page<T>(Enumerable.Empty<T>(), 0, PageSize, PageNumber, PageSize);
 
             if (PageNumber > 0) query = query.Skip(PageNumber * PageSize);
             query = query.Take(PageSize);
             var items = await query.ToArrayAsync(Cancel).ConfigureAwait(false);
 
-            return new Page<T>(items, total_count, PageNumber, PageSize);
+            return new Page<T>(items, items.Length, total_count, PageNumber, PageSize);
         }
 
         public async Task<T> GetById(int Id, CancellationToken Cancel = default)
