@@ -10,6 +10,7 @@ namespace SolutionTemplate.Interfaces.Base.Repositories
         /// <summary>Элементы страницы</summary>
         IEnumerable<T> Items { get; }
 
+        /// <summary>Число элементов на странице</summary>
         int ItemsCount { get; }
 
         /// <summary>Полное количество элементов на всех страницах</summary>

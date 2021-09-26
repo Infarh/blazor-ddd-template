@@ -131,17 +131,17 @@ namespace SolutionTemplate.DAL.Repositories
             int PageSize,
             CancellationToken Cancel = default)
         {
-            if (PageSize <= 0) return new Page<T>(Enumerable.Empty<T>(), PageSize, PageNumber, PageSize);
+            if (PageSize <= 0) return new Page<T>(Enumerable.Empty<T>(), 0, PageSize, PageNumber, PageSize);
 
             var query = Items.OrderByDistanceInRange(Latitude, Longitude, RangeInMeters);
             var total_count = await query.CountAsync(Cancel).ConfigureAwait(false);
-            if (total_count == 0) return new Page<T>(Enumerable.Empty<T>(), PageSize, PageNumber, PageSize);
+            if (total_count == 0) return new Page<T>(Enumerable.Empty<T>(), 0, 0, PageNumber, PageSize);
 
             if (PageNumber > 0) query = query.Skip(PageNumber * PageSize);
             query = query.Take(PageSize);
             var items = await query.ToArrayAsync(Cancel).ConfigureAwait(false);
 
-            return new Page<T>(items, total_count, PageNumber, PageSize);
+            return new Page<T>(items, items.Length, total_count, PageNumber, PageSize);
         }
 
         /// <summary>Удалить сущность, ближайшую к заданной точке</summary>
