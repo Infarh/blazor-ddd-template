@@ -1,0 +1,39 @@
+﻿<li class="nav-item dropdown @_ShowClass">
+    <a class="nav-link dropdown-toggle" @onclick="OnChange">
+        @Header
+    </a>
+    <div class="dropdown-menu @_ShowClass">
+        <CascadingValue Value="this">
+            @ChildContent
+        </CascadingValue>
+    </div>
+</li>
+
+
+
+@code {
+    private string _ShowClass;
+    private void OnChange() => _ShowClass = _ShowClass is null ? "show" : null;
+
+    private readonly List<DropDownMenuItem> _Items = new();
+
+    [Parameter] public RenderFragment Header { get; set; }
+
+    [Parameter] public RenderFragment<RenderFragment> Template { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    [Parameter] public DropDownMenuItem Selected { get; set; }
+
+    internal void AddItem(DropDownMenuItem item)
+    {
+        _Items.Add(item);
+        if (_Items.Count == 1)
+            Selected = item;
+        StateHasChanged();
+    }
+
+    private string GetClass(DropDownMenuItem item) => item == Selected ? "btn-primary" : "btn-secondary";
+
+    private void ActivateItem(DropDownMenuItem item) => Selected = item;
+}

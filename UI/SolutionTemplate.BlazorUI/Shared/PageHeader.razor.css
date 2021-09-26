@@ -1,0 +1,14 @@
+﻿header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.img-logo {
+    height: 80px;
+    align-self: flex-end;
+}
+
+.logo-info {
+    margin: auto 0;
+}

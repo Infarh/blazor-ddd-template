@@ -1,0 +1,28 @@
+﻿@if (Parent.SelectedPage == this)
+{
+    if (Parent.TabTemplate is { } template)
+    {
+        @template(ChildContent)
+    }
+    else
+    {
+        @ChildContent
+    }
+}
+
+@code {
+    [CascadingParameter] private TabControl Parent { get; set; }
+
+    [Parameter] public string Header { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Parent is null) throw new ArgumentNullException(nameof(Parent));
+
+        base.OnInitialized();
+
+        Parent.AddPage(this);
+    }
+}

@@ -1,0 +1,35 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Разделы</a>
+    <button class="navbar-toggler @_Menu.Show" type="button" @onclick="_Menu.OnChange">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse @_Menu.Show">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <DropDownMenu>
+                <Header>Test menu</Header>
+                <Template Context="value">
+                    Item: @value
+                </Template>
+                <ChildContent>
+                    <DropDownMenuItem Address="/">Home</DropDownMenuItem>
+                    @*<DropDownMenuItem Address="/counter">Counter</DropDownMenuItem>*@
+                    @*<DropDownMenuItem Address="fetchdata">Fetch data</DropDownMenuItem>*@
+                </ChildContent>
+            </DropDownMenu>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+@code {
+    private MenuToggler _Menu = new();
+}

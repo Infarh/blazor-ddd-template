@@ -1,0 +1,48 @@
+﻿<div class="btn-group" role="group">
+    @if (TabHeaderTemplate is null)
+    {
+        @foreach (var tab_page in _Pages)
+        {
+            <button class="btn @GetButtonClass(tab_page)" type="button" @onclick="() => ActivatePage(tab_page)">
+                @tab_page.Header
+            </button>
+        }
+    }
+    else
+    {
+        @foreach (var tab_page in _Pages)
+        {
+            <button class="btn @GetButtonClass(tab_page)" type="button" @onclick="() => ActivatePage(tab_page)">
+                @TabHeaderTemplate(tab_page)
+            </button>
+        }
+    }
+</div>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+
+@code {
+    [Parameter] public RenderFragment<TabPage> TabHeaderTemplate { get; set; }
+    [Parameter] public RenderFragment<RenderFragment> TabTemplate { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    public TabPage SelectedPage { get; set; }
+
+    private readonly List<TabPage> _Pages = new();
+
+    internal void AddPage(TabPage page)
+    {
+        _Pages.Add(page);
+        if (_Pages.Count == 1)
+            SelectedPage = page;
+        StateHasChanged();
+    }
+
+    private string GetButtonClass(TabPage page) => page == SelectedPage ? "btn-primary" : "btn-secondary";
+
+    private void ActivatePage(TabPage page) => SelectedPage = page;
+}
