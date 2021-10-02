@@ -16,6 +16,8 @@ namespace SolutionTemplate.DAL.Repositories
         protected IDbContextFactory<SolutionTemplateDB> ContextFactory { get; }
         protected readonly ILogger<DbContextFactoryRepository<T>> _Logger;
 
+        public bool NoTracked { get; set; } = true;
+
         public DbContextFactoryRepository(IDbContextFactory<SolutionTemplateDB> ContextFactory, ILogger<DbContextFactoryRepository<T>> Logger)
         {
             this.ContextFactory = ContextFactory;
@@ -25,7 +27,10 @@ namespace SolutionTemplate.DAL.Repositories
         /// <summary>Формирование запроса к источнику данных</summary>
         /// <param name="db">Контекст БД</param>
         /// <returns>Запрос сущностей из контекста БД</returns>
-        protected virtual IQueryable<T> GetDbQuery(SolutionTemplateDB db) => db.Set<T>();
+        protected virtual IQueryable<T> GetDbQuery(SolutionTemplateDB db) => 
+            NoTracked 
+                ? db.Set<T>().AsNoTracking() 
+                : db.Set<T>();
 
         public async Task<bool> IsEmpty(CancellationToken Cancel = default)
         {
@@ -138,7 +143,7 @@ namespace SolutionTemplate.DAL.Repositories
             if (await GetById(id, Cancel).ConfigureAwait(false) is not { } item)
                 return default;
             ItemUpdated(item);
-            await db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+            await Update(item, Cancel).ConfigureAwait(false);
             return item;
         }
 
@@ -177,7 +182,6 @@ namespace SolutionTemplate.DAL.Repositories
 
             _Logger.LogInformation("При удалении записи с id: {0} - запись не найдена", id);
             return null;
-
         }
     }
 }

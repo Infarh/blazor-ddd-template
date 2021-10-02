@@ -1,3 +1,3 @@
 @echo off
 
-dotnet new -i .\
+dotnet restore

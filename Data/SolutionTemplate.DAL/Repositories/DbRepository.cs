@@ -23,7 +23,10 @@ namespace SolutionTemplate.DAL.Repositories
         protected DbSet<T> Set { get; }
 
         /// <summary>Запрос сущностей из контекста БД</summary>
-        protected virtual IQueryable<T> Items => Set;
+        protected virtual IQueryable<T> Items => NoTracked ? Set.AsNoTracking() : Set;
+
+        /// <summary>Не отслеживать выдаваемые объекты в контексте БД</summary>
+        public bool NoTracked { get; set; } = true;
 
         /// <summary>Автоматически сохранять вносимые в репозиторий изменения</summary>
         public bool AutoSaveChanges { get; set; } = true;
@@ -109,9 +112,9 @@ namespace SolutionTemplate.DAL.Repositories
             if (item is null) throw new ArgumentNullException(nameof(item));
             _Logger.LogInformation("Обновление id: {0} - {1}...", item.Id, item);
 
-
             _db.Entry(item).State = EntityState.Modified;
-            if (AutoSaveChanges) await SaveChangesAsync(Cancel).ConfigureAwait(false);
+            if (AutoSaveChanges) 
+                await SaveChangesAsync(Cancel).ConfigureAwait(false);
 
             _Logger.LogInformation("Обновление id: {0} - {1} выполнено", item.Id, item);
             return item;
@@ -122,7 +125,7 @@ namespace SolutionTemplate.DAL.Repositories
             if (await GetById(id, Cancel).ConfigureAwait(false) is not { } item)
                 return default;
             ItemUpdated(item);
-            if (AutoSaveChanges) await SaveChangesAsync(Cancel).ConfigureAwait(false);
+            await Update(item, Cancel).ConfigureAwait(false);
             return item;
         }
 
