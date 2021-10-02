@@ -128,12 +128,15 @@ namespace SolutionTemplate.DAL.Repositories
             if (item is null) throw new ArgumentNullException(nameof(item));
 
             await using var db = ContextFactory.CreateDbContext();
-
-            db.Entry(item).State = EntityState.Modified;
-            await db.SaveChangesAsync(Cancel).ConfigureAwait(false);
-
+            await Update(db, item, Cancel).ConfigureAwait(false);
             _Logger.LogInformation("Обновление id: {0} - {1} выполнено", item.Id, item);
             return item;
+        }
+
+        private static Task Update(SolutionTemplateDB db, T item, CancellationToken Cancel)
+        {
+            db.Entry(item).State = EntityState.Modified;
+            return db.SaveChangesAsync(Cancel);
         }
 
         public async Task<T> UpdateAsync(int id, Action<T> ItemUpdated, CancellationToken Cancel = default)
@@ -143,7 +146,7 @@ namespace SolutionTemplate.DAL.Repositories
             if (await GetById(id, Cancel).ConfigureAwait(false) is not { } item)
                 return default;
             ItemUpdated(item);
-            await Update(item, Cancel).ConfigureAwait(false);
+            await Update(db, item, Cancel).ConfigureAwait(false);
             return item;
         }
 
