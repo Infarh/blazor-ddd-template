@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using SolutionTemplate.Interfaces.Base.Entities;
 using SolutionTemplate.Interfaces.Base.Repositories;
 
-namespace SolutionTemplate.BlazorUI.Hosting.Controllers.Base
+namespace SolutionTemplate.BlazorUI.Hosting.Controllers.API.Base
 {
     public abstract class TimedEntityController<T> : EntityController<T> where T : ITimedEntity, IGPSEntity<int>
     {

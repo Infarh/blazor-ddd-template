@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using SolutionTemplate.Interfaces.Base.Entities;
 using SolutionTemplate.Interfaces.Base.Repositories;
 
-namespace SolutionTemplate.BlazorUI.Hosting.Controllers.Base
+namespace SolutionTemplate.BlazorUI.Hosting.Controllers.API.Base
 {
     /// <summary>Контроллер именованныйх сущностей</summary>
     /// <typeparam name="T">Тип именованной сущности</typeparam>

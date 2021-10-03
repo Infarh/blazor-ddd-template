@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using SolutionTemplate.Interfaces.Base.Entities;
 using SolutionTemplate.Interfaces.Base.Repositories;
 
-namespace SolutionTemplate.BlazorUI.Hosting.Controllers.Base
+namespace SolutionTemplate.BlazorUI.Hosting.Controllers.API.Base
 {
     public abstract class GPSEntityController<T> : EntityController<T> where T : IGPSEntity
     {
