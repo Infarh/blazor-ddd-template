@@ -1,4 +1,5 @@
 using System;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using SolutionTemplate.DAL.Context;
 using SolutionTemplate.DAL.Repositories;
 using SolutionTemplate.DAL.Sqlite;
@@ -57,6 +59,11 @@ namespace SolutionTemplate.BlazorUI.Hosting
                 opt.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
 
             });
+
+            services.AddSignalR();
+            services.AddMediatR(typeof(Startup));
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolutionTemplate.WEB.API", Version = "v1" }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,6 +72,8 @@ namespace SolutionTemplate.BlazorUI.Hosting
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SolutionTemplate.WEB.API v1"));
             }
             else
             {
