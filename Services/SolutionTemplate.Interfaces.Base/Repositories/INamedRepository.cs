@@ -30,5 +30,5 @@ namespace SolutionTemplate.Interfaces.Base.Repositories
 
     /// <summary>Репозиторий именованных сущностей</summary>
     /// <typeparam name="T">Тип сущности</typeparam>
-    public interface INamedRepository<T> : INamedRepository<T, int>, IRepository<T> where T : INamedEntity<int> { }
+    public interface INamedRepository<T> : INamedRepository<T, int>, IRepository<T> where T : INamedEntity { }
 }

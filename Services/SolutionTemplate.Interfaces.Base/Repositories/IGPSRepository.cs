@@ -87,5 +87,5 @@ namespace SolutionTemplate.Interfaces.Base.Repositories
 
     /// <summary>Репозиторий сущностей с определённым географическим положением</summary>
     /// <typeparam name="T">Тип сущности с определённым географическим положением</typeparam>
-    public interface IGPSRepository<T> : IGPSRepository<T, int>, IRepository<T> where T : IGPSEntity<int> { }
+    public interface IGPSRepository<T> : IGPSRepository<T, int>, IRepository<T> where T : IGPSEntity { }
 }

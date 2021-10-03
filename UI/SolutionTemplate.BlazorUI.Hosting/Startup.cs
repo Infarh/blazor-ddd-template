@@ -62,6 +62,7 @@ namespace SolutionTemplate.BlazorUI.Hosting
 
             services.AddSignalR();
             services.AddMediatR(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolutionTemplate.WEB.API", Version = "v1" }));
         }

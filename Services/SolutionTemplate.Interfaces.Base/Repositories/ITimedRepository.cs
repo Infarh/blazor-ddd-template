@@ -98,5 +98,5 @@ namespace SolutionTemplate.Interfaces.Base.Repositories
 
     /// <summary>Репозиторий сущностей, обладающих указанием времени</summary>
     /// <typeparam name="T">Тип сущностей</typeparam>
-    public interface ITimedRepository<T> : ITimedRepository<T, int>, IRepository<T> where T : ITimedEntity<int> { }
+    public interface ITimedRepository<T> : ITimedRepository<T, int>, IRepository<T> where T : ITimedEntity { }
 }
