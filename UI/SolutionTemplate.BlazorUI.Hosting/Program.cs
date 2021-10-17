@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using SolutionTemplate.DAL.Context;
 
 namespace SolutionTemplate.BlazorUI.Hosting
@@ -21,6 +22,7 @@ namespace SolutionTemplate.BlazorUI.Hosting
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+               .UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration))
                .ConfigureWebHostDefaults(host => host
                    .UseStartup<Startup>()
                 )
