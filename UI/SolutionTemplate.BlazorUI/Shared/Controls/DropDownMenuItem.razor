@@ -1,17 +1,15 @@
 ﻿@if (Parent.Template is { } template)
 {
-    <a class="dropdown-item" href="@(Address ?? "#")">@template(ChildContent)</a>
+    @template(ChildContent)
 }
 else
 {
-    <a class="dropdown-item" href="@(Address ?? "#")">@ChildContent</a>
+    @ChildContent
 }
 
 @code {
     [CascadingParameter] private DropDownMenu Parent { get; set; }
 
-    [Parameter] public string Address { get; set; } = "#";
- 
     [Parameter] public RenderFragment ChildContent { get; set; }
 
     protected override void OnInitialized()
