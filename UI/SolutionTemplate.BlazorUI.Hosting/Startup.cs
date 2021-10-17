@@ -84,6 +84,8 @@ namespace SolutionTemplate.BlazorUI.Hosting
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
+            //app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
