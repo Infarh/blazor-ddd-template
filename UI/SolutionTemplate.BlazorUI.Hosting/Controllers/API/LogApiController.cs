@@ -10,22 +10,22 @@ namespace SolutionTemplate.BlazorUI.Hosting.Controllers.API
 
         public LogApiController(ILogger<LogApiController> Logger) => _Logger = Logger;
 
-        [HttpGet("trace"), HttpGet("trace/{Message}")]
+        [HttpGet("trace")]
         public void LogTrace(string Message) => _Logger.LogTrace(Message);
 
-        [HttpGet("debug"), HttpGet("debug/{Message}")]
+        [HttpGet("debug")]
         public void LogDebug(string Message) => _Logger.LogDebug(Message);
 
-        [HttpGet("inforamtion"), HttpGet("inforamtion/{Message}")]
+        [HttpGet("inforamtion")]
         public void LogInformation(string Message) => _Logger.LogInformation(Message);
         
-        [HttpGet("warning"), HttpGet("warning/{Message}")]
+        [HttpGet("warning")]
         public void LogWarning(string Message) => _Logger.LogWarning(Message);
         
-        [HttpGet("error"), HttpGet("error/{Message}")]
+        [HttpGet("error")]
         public void LogError(string Message) => _Logger.LogError(Message);
         
-        [HttpGet("critical"), HttpGet("critical/{Message}")]
+        [HttpGet("critical")]
         public void LogCritical(string Message) => _Logger.LogCritical(Message);
     }
 }

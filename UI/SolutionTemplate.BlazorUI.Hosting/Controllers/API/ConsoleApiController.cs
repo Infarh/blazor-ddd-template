@@ -10,9 +10,6 @@ namespace SolutionTemplate.BlazorUI.Hosting.Controllers.API
         public void Clear() => Console.Clear();
 
         [HttpGet("line")]
-        [HttpGet("line/{Message}")]
-        [HttpGet("writeline")]
-        [HttpGet("writeline/{Message}")]
         public void WriteLine(string Message) => Console.WriteLine(Message);
     }
 }
