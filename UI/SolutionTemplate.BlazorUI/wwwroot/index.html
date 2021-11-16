@@ -5,14 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>SolutionTemplate.BlazorUI</title>
+
     <base href="/" />
+    
     <link href="lib-blazor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="lib-blazor/font-awesome/css/all.min.css" rel="stylesheet" />
     <link href="lib-blazor/open-iconic/font/css/open-iconic.min.css" rel="stylesheet" />
+    
     <link href="css/main.css" rel="stylesheet" />
     <link href="SolutionTemplate.BlazorUI.styles.css" rel="stylesheet" />
+    
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
 </head>
 
 <body>
@@ -24,6 +29,7 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
 </html>
