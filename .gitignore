@@ -366,3 +366,5 @@ FodyWeavers.xsd
 **/wwwroot/js
 **/wwwroot/lib-*
 **/wwwroot/js-*
+/UI/SolutionTemplate.BlazorUI/Scripts/main.js.map
+/UI/SolutionTemplate.BlazorUI/Scripts/main.js
