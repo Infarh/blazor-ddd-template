@@ -1,14 +1,3 @@
-using MediatR;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Serilog;
-using SolutionTemplate.DAL.Context;
-using SolutionTemplate.DAL.Repositories;
-using SolutionTemplate.DAL.Sqlite;
-using SolutionTemplate.DAL.SqlServer;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Logging.AddSerilog();
