@@ -8,9 +8,9 @@ else
 }
 
 @code {
-    [CascadingParameter] private DropDownMenu Parent { get; set; }
+    [CascadingParameter] private DropDownMenu Parent { get; set; } = null!;
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     protected override void OnInitialized()
     {

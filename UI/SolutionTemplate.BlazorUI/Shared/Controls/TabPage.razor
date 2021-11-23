@@ -11,11 +11,11 @@
 }
 
 @code {
-    [CascadingParameter] private TabControl Parent { get; set; }
+    [CascadingParameter] private TabControl Parent { get; set; } = null!;
 
-    [Parameter] public string Header { get; set; }
+    [Parameter] public string Header { get; set; } = null!;
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
 
     protected override void OnInitialized()
     {

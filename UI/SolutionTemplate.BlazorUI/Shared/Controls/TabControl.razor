@@ -25,12 +25,12 @@
 
 
 @code {
-    [Parameter] public RenderFragment<TabPage> TabHeaderTemplate { get; set; }
-    [Parameter] public RenderFragment<RenderFragment> TabTemplate { get; set; }
+    [Parameter] public RenderFragment<TabPage>? TabHeaderTemplate { get; set; }
+    [Parameter] public RenderFragment<RenderFragment>? TabTemplate { get; set; }
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    public TabPage SelectedPage { get; set; }
+    public TabPage? SelectedPage { get; set; }
 
     private readonly List<TabPage> _Pages = new();
 

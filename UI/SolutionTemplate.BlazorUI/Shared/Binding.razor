@@ -1,11 +1,10 @@
 ﻿@using System.ComponentModel
-@typeparam TModel where TModel : System.ComponentModel.INotifyPropertyChanged
 
-@if (_Model is { } model)
+@if (_Value is { } model)
 {
     @if (ChildContent is { } template)
     {
-        @template(model)
+        @template
     }
     else
     {
@@ -19,25 +18,35 @@ else if (EmptyTemplate is { } empty_template)
 
 @code
 {
+    [Parameter]
     public RenderFragment? EmptyTemplate { get; set; }
 
-    public RenderFragment<TModel>? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
-    private TModel? _Model;
+    private object? _Value;
 
-    public TModel? Model
+    [Parameter]
+    public object? Value
     {
-        get => _Model;
+        get => _Value;
         set
         {
-            if (ReferenceEquals(_Model, value)) return;
-            if (_Model is { } old_model)
-                old_model.PropertyChanged -= OnModelChanged;
-            _Model = value;
-            if (value is { } new_model)
-                new_model.PropertyChanged += OnModelChanged;
+            if (ReferenceEquals(_Value, value)) return;
+            if (_Value is INotifyPropertyChanged old_model)
+                old_model.PropertyChanged -= OnValueChanged;
+            _Value = value;
+            if (value is INotifyPropertyChanged new_model)
+                new_model.PropertyChanged += OnValueChanged;
         }
     }
 
-    private void OnModelChanged(object? Sender, PropertyChangedEventArgs E) => StateHasChanged();
+    public string? PropertyName { get; set; }
+
+    private void OnValueChanged(object? Sender, PropertyChangedEventArgs E)
+    {
+        if (PropertyName is { Length: > 0 } name && name != E.PropertyName)
+            return;
+        StateHasChanged();
+    }
 }

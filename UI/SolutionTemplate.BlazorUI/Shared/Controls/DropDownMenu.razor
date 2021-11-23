@@ -12,18 +12,18 @@
 
 
 @code {
-    private string _ShowClass;
+    private string? _ShowClass;
     private void OnChange() => _ShowClass = _ShowClass is null ? "show" : null;
 
     private readonly List<DropDownMenuItem> _Items = new();
 
-    [Parameter] public RenderFragment Header { get; set; }
+    [Parameter] public RenderFragment? Header { get; set; }
 
-    [Parameter] public RenderFragment<RenderFragment> Template { get; set; }
+    [Parameter] public RenderFragment<RenderFragment>? Template { get; set; }
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter] public DropDownMenuItem Selected { get; set; }
+    [Parameter] public DropDownMenuItem? Selected { get; set; }
 
     internal void AddItem(DropDownMenuItem item)
     {
