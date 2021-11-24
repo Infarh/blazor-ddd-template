@@ -8,3 +8,46 @@
 
 Index
 
+<hr />
+
+<CommandButton IconName="add" Text="New item" MenuItems="_MenuProperties" />
+
+@code {
+
+    private RelayCommand? _ButtonCommand;
+    private bool _CommandEnabled;
+    private bool CommandEnabled
+    {
+        get => _CommandEnabled;
+        set
+        {
+            if (Equals(_CommandEnabled, value)) return;
+            _CommandEnabled = value;
+            _ButtonCommand?.OnCanExecuteChanged();
+        }
+    }
+
+    private bool _Muted;
+
+    private IEnumerable<ContextualMenuItem>? _MenuProperties;
+
+
+    private void Mute() => _Muted = !_Muted;
+
+    protected override Task OnInitializedAsync()
+    {
+        _MenuProperties = new List<ContextualMenuItem>
+        {
+            new() { Key = "emailMessage", Text = "Email message", IconName = "mail"},
+            new() { Key = "calendarEvent", Text = "Calendar event", IconName = "calendar_ltr"}
+        };
+        _ButtonCommand = new RelayCommand(_ => 
+        {
+            StateHasChanged();
+        }, p => ((Func<bool>)p!).Invoke());
+
+        return base.OnInitializedAsync();
+    }
+
+
+}
