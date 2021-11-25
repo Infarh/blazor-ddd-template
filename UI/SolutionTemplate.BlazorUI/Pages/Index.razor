@@ -14,7 +14,6 @@ Index
 
 @code {
 
-    private RelayCommand? _ButtonCommand;
     private bool _CommandEnabled;
     private bool CommandEnabled
     {
@@ -23,7 +22,6 @@ Index
         {
             if (Equals(_CommandEnabled, value)) return;
             _CommandEnabled = value;
-            _ButtonCommand?.OnCanExecuteChanged();
         }
     }
 
@@ -34,20 +32,13 @@ Index
 
     private void Mute() => _Muted = !_Muted;
 
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         _MenuProperties = new List<ContextualMenuItem>
         {
             new() { Key = "emailMessage", Text = "Email message", IconName = "mail"},
             new() { Key = "calendarEvent", Text = "Calendar event", IconName = "calendar_ltr"}
         };
-        _ButtonCommand = new RelayCommand(_ => 
-        {
-            StateHasChanged();
-        }, p => ((Func<bool>)p!).Invoke());
-
-        return base.OnInitializedAsync();
+        base.OnInitialized();
     }
-
-
 }

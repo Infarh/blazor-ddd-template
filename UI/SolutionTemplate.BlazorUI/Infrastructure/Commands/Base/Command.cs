@@ -34,7 +34,7 @@ public abstract class Command : ICommand, INotifyPropertyChanged
         }
     }
 
-    bool ICommand.CanExecute(object? parameter) => CanExecute(parameter);
+    bool ICommand.CanExecute(object? p) => CanExecute(p);
 
     void ICommand.Execute(object? parameter)
     {
@@ -42,7 +42,7 @@ public abstract class Command : ICommand, INotifyPropertyChanged
         Execute(parameter);
     }
 
-    protected virtual bool CanExecute(object? parameter) => _Enable;
+    protected virtual bool CanExecute(object? p) => _Enable;
 
     protected abstract void Execute(object? parameter);
 }

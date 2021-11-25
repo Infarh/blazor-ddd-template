@@ -16,7 +16,7 @@ public abstract class CommandAsync : Command
 
     public bool InvokeAsync { get; init; }
 
-    protected override bool CanExecute(object? parameter) => base.CanExecute(parameter) && _CommandTask is null;
+    protected override bool CanExecute(object? p) => base.CanExecute(p) && _CommandTask is null;
 
     protected override async void Execute(object? parameter)
     {

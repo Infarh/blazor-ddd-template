@@ -15,7 +15,7 @@ public class LambdaCommand : Command
         _CanExecute = CanExecute;
     }
 
-    protected override bool CanExecute(object? parameter) => base.CanExecute(parameter) && (_CanExecute?.Invoke(parameter) ?? true);
+    protected override bool CanExecute(object? p) => base.CanExecute(p) && (_CanExecute?.Invoke(p) ?? true);
 
     protected override void Execute(object? parameter) => _Execute(parameter);
 }
